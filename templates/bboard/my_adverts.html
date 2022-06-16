@@ -1,0 +1,30 @@
+{% extends "bboard/default.html" %}
+
+{% block content %}
+    <h1>Список объявлений:</h1>
+
+    {% if object_list %}
+        <ul>
+
+            {% for advert in object_list %}
+                <li>
+                    <a href="{{ advert.get_absolute_url }}">{{ advert.header }}</a> ({{ advert.author }})
+                    <a href="{% url 'advert_update' advert.id %}">Редактировать</a>
+                    <a href="{% url 'advert_delete' advert.id %}">Удалить</a>
+                </li>
+            {% endfor %}
+
+        </ul>
+         {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+        {% endif %}
+        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+        {% endif %}
+    {% else %}
+        <p>Объявления не найдены</p>
+    {% endif %}
+{% endblock %}

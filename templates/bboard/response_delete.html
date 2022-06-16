@@ -1,0 +1,38 @@
+{% extends 'bboard/default.html' %}
+
+{% block title %} Удаление отклика {% endblock title %}
+
+{% block content %}
+    <h3>Вы действительно хотите удалить данный отклик?</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>
+                Отправитель
+            </th>
+            <th>
+                Дата
+            </th>
+            <th>
+                Текст
+            </th>
+        </tr>
+
+        </thead>
+        <tr>
+            <td>
+                {{ response.sender }}
+            </td>
+            <td>
+                {{ response.date }}
+            </td>
+            <td>
+                {{ response.content }}
+            </td>
+        </tr>
+    </table>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Подтвердить"></form>
+{% endblock content %} 
